@@ -1,100 +1,833 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!doctype html>
+<html lang="zh-CN" class="no-js">
 <head>
     <meta charset="UTF-8">
+    <title>Chongfeng Wei</title>
+    <meta name="description" content="Chongfeng Wei">
+    <meta property="og:title" content="Chongfeng Wei">
+    <meta property="og:description" content="Chongfeng We">
+    <meta property="og:url" content="https://yourdomain.github.io">
+    <meta property="og:site_name" content="Chongfeng Wei">
+    <link rel="canonical" href="https://yourdomain.github.io">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人网页</title>
-    <link rel="stylesheet" href="styles.css"> <!-- 你可以使用自己的 CSS 文件来定制样式 -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    
+    <link rel="stylesheet" href="https://yourdomain.github.io/assets/css/main.css">
+    <link rel="apple-touch-icon" href="https://yourdomain.github.io/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="https://yourdomain.github.io/images/favicon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
+        /* 设置页面整体布局 */
+        html, body {
+            height: 100%; /* 确保html和body占满100%高度 */
+            margin: 0; /* 去掉默认margin */
+            display: flex;
+            flex-direction: column; /* 纵向布局 */
+        }
+        
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            line-height: 1.6;
         }
+
         header {
-            background-color: #4CAF50; /* 顶部导航栏背景颜色 */
-            padding: 10px 20px;
+            background-color: #f5f5f5; /* 导航背景颜色 */
+            padding: 10px;
+            border-bottom: 1px solid lightgray; /* 底部灰色边框 */
         }
+
+        footer {
+            background-color: #f5f5f5; /* 与header相同的背景颜色 */
+            padding: 10px; /* 上下内边距 */
+            text-align: center; /* 文本居中 */
+            border-top: 1px solid lightgray; /* 顶部灰色边框 */
+            margin-top: auto; /* 保持底栏在底部 */
+        }
+
         nav {
             display: flex;
-            justify-content: space-around; /* 在导航项之间均匀分配空间 */
+            justify-content: flex-start;
         }
+
         nav a {
-            color: white; /* 导航项文本颜色 */
-            text-decoration: none; /* 去掉下划线 */
-            padding: 10px 15px;
+            color: gray; /* 导航字体颜色 */
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold; /* 导航字体加粗 */
+            font-size: 18px; /* 增加字体大小 */
         }
+
         nav a:hover {
-            background-color: #45a049; /* 鼠标悬停时的背景颜色 */
+            background-color: #f0f0f0; /* 悬停时导航背景颜色 */
         }
+
+        .layout {
+            display: flex;
+            padding: 20px;
+            flex: 1; /* 主内容区域占据剩余空间 */
+        }
+
+        .sidebar {
+            width: 25%; /* 左侧区域宽度为25% */
+            text-align: center;
+            margin-right: 20px; /* 右侧留出间距 */
+            margin-top: 50px; /* 向下移动整体 */
+        }
+
+        .sidebar img {
+            width: 150px; /* 照片宽度 */
+            height: 150px; /* 照片高度 */
+            border-radius: 50%; /* 圆形照片 */
+        }
+
         .content {
-            padding: 20px; /* 内容区的内边距 */
+            width: 65%; /* 右侧区域宽度为65% */
+            max-width: 900px; /* 最大宽度设为800px */
+            margin: 0 auto; /* 居中对齐 */
+        }
+
+        section {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+
+        h2 {
+            margin-top: 50px; /* 设置标题上方的间距 */
+            margin-bottom: 10px; /* 设置标题下方的间距 */
+            cursor: pointer; /* 鼠标悬停时显示手指光标 */
+            display: block; /* 确保标题可见 */
+            visibility: visible; /* 确保标题可见 */
+        }
+
+        .info {
+            cursor: pointer; /* 让信息部分看起来可点击 */
+            color: blue; /* 信息颜色设置为蓝色 */
+            text-decoration: underline; /* 添加下划线 */
+        }
+
+        .social-icons {
+            margin-top: 10px; /* 添加顶部间距 */
+        }
+
+        .social-icons a {
+            text-decoration: none; /* 去掉下划线 */
+            color: black; /* 图标颜色 */
+            display: flex; /* 按列显示 */
+            align-items: center; /* 垂直居中 */
+            margin: 5px 0; /* 图标间距 */
+        }
+
+        .social-icons i {
+            font-size: 20px; /* 图标大小 */
+            margin-right: 5px; /* 图标与文本间距 */
+        }
+
+        /* 新增样式以使图标左对齐 */
+        .icon-wrapper {
+            display: flex; /* 使用flexbox对齐 */
+            align-items: center; /* 垂直居中 */
+            margin: 5px 0; /* 图标间距 */
+            justify-content: flex-start; /* 水平左对齐 */
+            margin-left: 40px; 
+        }
+
+        .arrow {     
+            font-size: 0.8em; /* 设置肩头符号的大小 */
+            margin-right: 5px;
+            color: gray;
+        }
+
+        .content ul {
+            list-style: disc; /* 使用默认的小点 */
+            padding-left: 20px; /* 增加左侧填充以便小点显示 */
+        }
+
+        .content ul li {
+            margin-bottom: 15px; /* 增加不同论文之间的间距 */
+        }
+
+        .CJF7A2 {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            padding: 20px; /* 添加内边距 */
+        }
+
+        .wixui-rich-text__text {
+            color: #ffffff; /* 确保文本在背景上可见 */
+        }
+
+        #news-list li {
+            margin-bottom: 35px; /* 增加每条新闻之间的间隔 */
         }
     </style>
+
+   <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        function toggleInfo(infoId) {
+            const infoElement = document.getElementById(infoId);
+            infoElement.style.display = infoElement.style.display === 'none' ? 'block' : 'none';
+        }
+
+        window.onload = function() {
+            showSection('home');
+        };
+    </script>
 </head>
+
 <body>
+    <header>
+  <nav>
+            <a href="#" onclick="showSection('home')">Home</a>
+            <a href="#" onclick="showSection('people')">People</a>
+            <a href="#" onclick="showSection('research')">Research</a>
+            <a href="#" onclick="showSection('news')">News</a>
+            <a href="#" onclick="showSection('publications')">Publications</a>
+            <a href="#" onclick="showSection('openings')">Openings</a>
+        </nav>
+    </header>
 
-<header>
-    <nav>
-        <a href="#people">People</a>
-        <a href="#research">Research</a>
-        <a href="#news">News</a>
-        <a href="#publications">Publications</a>
-        <a href="#openings">Openings</a>
-    </nav>
-</header>
+    <div class="layout">
+    <!-- 左侧的照片和个人信息 -->
+    <div class="sidebar">
+        <img src="chongfeng.jpg" alt="Chongfeng Wei">
+        <h1 style="font-size: 18px;">Chongfeng Wei</h1>
+        <p><strong>James Watt School of Engineering,<br> University of Glasgow</strong></p>
 
-<div class="content">
-    <h1>欢迎来到我的个人网页</h1>
-    <p>这里是我研究和工作的相关信息。</p>
+<div class="icon-wrapper">
+    <i class="fas fa-envelope"></i>
+    <a href="mailto:chongfeng.wei@glasgow.ac.uk" style="color: #52adc8; font-size: 14px; margin-left: 14px; text-decoration: none;">
+        <strong>chongfeng.wei@glasgow.ac.uk</strong>
+    </a>
+</div>
+
+
+<div class="icon-wrapper">
+    <i class="fas fa-envelope"></i>
+    <a href="mailto:chongfeng.wei@glasgow.ac.uk" style="color: #52adc8; font-size: 14px; margin-left: 14px; text-decoration: none;">
+        <strong>weichongfeng@gmail.com</strong>
+    </a>
+</div>
+
+<div class="icon-wrapper">
+    <i class="fas fa-map-marker-alt"></i>
+    <a href="mailto:chongfeng.wei@glasgow.ac.uk" style="color: #52adc8; font-size: 14px; margin-left: 17px; text-decoration: none;">
+        <strong>Glasgow, G12 8QQ, UK</strong>
+    </a>
+</div>
+        <!-- GitHub Section -->
+        <div class="icon-wrapper">
+            <i class="fab fa-github"></i>
+            <span class="info" style="color: #52adc8; font-size: 14px; margin-left: 14px;">
+                <strong>
+                    <a href="https://github.com/w20054072" target="_blank" style="color: #52adc8; text-decoration: none;">Github</a>
+                </strong>
+            </span>
+        </div>
+
+        <!-- Google Scholar Section -->
+        <div class="icon-wrapper">
+            <i class="fas fa-graduation-cap"></i>
+            <span class="info" style="color: #52adc8; font-size: 14px; margin-left: 9px;">
+                <strong>
+                    <a href="https://scholar.google.com/citations?hl=zh-CN&user=zdjSMN8AAAAJ" target="_blank" style="color: #52adc8; text-decoration: none;">Google Scholar</a>
+                </strong>
+            </span>
+        </div>
+    </div>
+
+    <!-- 右侧内容 -->
+   <div class="content">
+   <section id="home" class="active">
+   <h2>About Me </h2>
+   <p style="text-align: justify;" >Dr. Chongfeng Wei is an Associate Professor (University Senior Lecturer) of James Watt School of Engineering at University of Glasgow. Chongfeng received his PhD from University of Birmingham, after which he worked at Hong Kong Polytechnic University and University of Waterloo as a postdoc, and then joined Shanghai Jiao Tong University as an assistant professor, after which he moved back to the UK until now. Chongfeng is interested in how to make the future autonomous vehicles interact with humans and the traffic environments naturally, and he is also interested in the design of robots that can effectively interact with diverse environments including humans and severe environments by employing AI techniques, bio-designs, and first principles of dynamics and control. Chongfeng also serves as an Associate Editor of IEEE TITS, IEEE TVT, IEEE TIV, IEEE OJ-ITS, and Frontiers on AI and Robotics.</p>
+
+<h2>Research Interests</h2>
+<ul>
+    <li>Decision-making and Planning of Intelligent Vehicles</li>
+    <li>Collective Autonomy: Perception and Planning</li>
+    <li>Robotic System Design and Dynamical Control</li>
+    <li>Dynamics and Control of Mechanical Systems</li>
+    <li>Human Behaviour Study and Prediction</li>
+</ul>
+<h2>Potential Opportunity</h2>
+<p style="text-align: justify;">I am constantly looking for passionate PhD students to join me. Please contact me if you are interested in applying for a PhD candidate in my research lab. Visiting scholars in related research areas are also welcome to contact. University of Glasgow has several type of scholarships including both University scholarship (14 international ones) and  CSC-based scholarship (20 candidates), so if you are interested in phd application through CSC and have relevant background and excellent research experience, please contact me.</p>
+  </section>
+
+
+
     
-    <section id="people">
-    <h2>People</h2>
+
+<section id="people">
+    <h2 style="margin-bottom: 5px;"><strong>PI and Lab Director:</strong></h2>
+    <p>Chongfeng Wei</p>
+
+    <h2 style="margin-bottom: 20px;"><strong>PhD Students:</strong></h2>
     <p>
-        <strong>PI and Lab Director:</strong><br>
-        Chongfeng Wei
-    </p>
-    <p>
-        <strong>PhD Students:</strong><br>
-        Meiting Dang  (Joint supervision with Prof. David Flynn and Prof. Dezong Zhao)<br>
+        Meiting Dang (Joint supervision with Prof. David Flynn and Prof. Dezong Zhao)<br>
         Hady Farrag (Joint supervision with Prof. Yan Jin)<br>
         Jing Wang (Joint supervision with Prof. Yan Jin)<br>
         Yanping Wu (Joint supervision with Prof. David Flynn and Prof. Dezong Zhao)<br>
-        Jack Close   (Joint supervision with Dr. Mien Van)<br>
+        Jack Close (Joint supervision with Dr. Mien Van)<br>
         Ruihan Yao (Joint supervision with Prof. Yan Jin)<br>
         Zixuan Huang (Joint supervision with Prof. Dezong Zhao)<br>
         Boyu Chen (Joint supervision with Prof. Dezong Zhao)<br>
         Chaoning He (Visiting PhD)<br>
         Haichuan Zhang (Visiting PhD)
     </p>
+
+    <h2 style="margin-bottom: 20px;"><strong>Alumni:</strong></h2>
     <p>
-     <strong>Alumni:</strong><br> 
-      Dr Kai Tian  (Graduated in 2023)<br>
-      Dr Chen Peng (Graduated in 2024)<br>
-      Dr Luca Crasato (Graduated in 2024)
-    </p> 
-    </section>
+        Dr. Kai Tian (Graduated in 2023)<br>
+        Dr. Chen Peng (Graduated in 2024)<br>
+        Dr. Luca Crasato (Graduated in 2024)
+    </p>
+</section>
 
-    <section id="research">
-        <h2>Research</h2>
-        <p>描述你的研究方向和项目。</p>
-    </section>
 
-    <section id="news">
-        <h2>News</h2>
-        <p>发布与你相关的最新消息和动态。</p>
-    </section>
+<section id="research" style="margin-top: 20px;">
+    <h2> Research Overview </h2>
+    <p style="text-align: justify; margin-top: 37.8px" >
+        We connect research in mechanical engineering, electrical engineering, computer science, psychology, and mathematics to tackle a wide range of problems across the field of intelligent vehicles and dynamical systems. Our group aims to develop innovative dynamic models and control algorithms to characterize and improve the behavior of intelligent vehicles and mechanical systems in relation to safety, comfort, acceptance, naturalness, and trust. We provide fundamental insights into human-centric intelligent systems and build the next generation of intelligent vehicles and robots to address challenges in human-robot interaction, decision making and control, human factors, and transportation.
+    </p>
 
-    <section id="publications">
-        <h2>Publications</h2>
-        <p>列出你的发表作品和研究成果。</p>
-    </section>
+    <div style="display: flex; align-items: flex-start; margin-top: 37.8px;"> <!-- 减小margin-top -->
+        <div style="flex: 1.2; margin-right: 20px;">
+            <img src="1.jpg" alt="Description of the first image" style="width: 100%; max-width: 300px; height: auto; border-radius: 8px; margin-bottom: 0px;">
+            <img src="2.jpg" alt="Description of the second image" style="width: 100%; max-width: 300px; height: auto; border-radius: 8px;">
+        </div>
+        <div style="flex: 1.8; text-align: justify;">
+            <h3 style="margin-top: -13px;">Decision-making of Intelligent Vehicles</h3>
+            <p>
+                Within the complex and interactive environment, automated vehicles (AVs) not only need to avoid the dynamic and static obstacles, but also need to cooperate or negotiate with other road users. One critical challenge is that the AVs cannot socially behave like rational human drivers when interacting with other road users, especially in interactive urban environments engaged with heterogeneous road users. Our study is to develop human-centric decision-making and control algorithms for AVs in relation to trust, acceptance, and naturalness.
+            </p>
+        </div>
+    </div>
 
-    <section id="openings">
-        <h2>Openings</h2>
-        <p>介绍可用的职位或实习机会。</p>
-    </section>
-</div>
+    <div style="display: flex; align-items: flex-start; margin-top: 37.8px;"> <!-- 减小margin-top -->
+        <div style="flex: 1.8; text-align: justify;">
+            <h3>Human-Robot Interaction</h3>
+            <p>
+               Although automated vehicle studies are moving forward at a fast pace, this study investigates how humans interact with robots and automated vehicles. The future connected and automated vehicles, as well as robots, will co-exist with humans. Many challenges will arise due to the uncertainty of human behavior and the limited understanding between humans and robots or intelligent vehicles. Our research in this area focuses on investigating human factors, predicting human behavior, and developing human-centric autonomous systems that can coexist and cooperate with humans.
+            </p>
+        </div>
+        <div style="flex: 1.2; margin-left: 20px; margin-top: 37.8px;"> <!-- 向下移动 -->
+            <img src="3.jpg" alt="Description of the first image" style="width: 100%; max-width: 300px; height: auto; border-radius: 8px; margin-bottom: 0px;">
+            <img src="4.jpg" alt="Description of the second image" style="width: 100%; max-width: 300px; height: auto; border-radius: 8px;">
+        </div>
+    </div>
+
+    <div style="display: flex; align-items: flex-start; margin-top:37.8px;"> <!-- 减小margin-top -->
+        <div style="flex: 1.4; margin-right: 0px;">
+            <img src="5.jpg" alt="Description of the first image" style="width: 100%; max-width: 300px; height: auto; border-radius: 8px; margin-bottom: 10px;">
+            <img src="6.jpg" alt="Description of the second image" style="width: 100%; max-width: 300px; height: auto; border-radius: 8px;">
+        </div>
+        <div style="flex: 1.6; text-align: justify;">
+            <h3 style="margin-top: -13px;">Dynamics and Control</h3>
+            <p>
+               Our research in dynamics is to develop dynamic models to characterize the dynamic behavior of mechanical systems, particularly nonlinear systems. Through exploring the nonlinear properties of these mechanical systems, we can optimize designs and improve the accuracy of mathematical modeling. With the developed dynamic systems, we also develop controllers to enhance their performance in terms of comfort, stability, safety, and energy economy.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+<section id="news">
+    <h2>Latest News</h2>
+    <ul id="news-list">
+        <li>
+            <strong>28 Sept 2024:</strong>
+            <br/>I was invited to give a presentation ("Coupled Pedestrian-Vehicle Interaction and Decision-making") at the 6th FISITA Intelligent Safety Conference China.
+        </li>
+        <li>
+            <strong>28 Aug 2024:</strong>
+            <br/>I gave an invited presentation "Human-Automated Vehicle Interaction: Virtual Reality Studies" at the 29th International Conference on Automation and Computing (ICAC 2024).
+        </li>
+        <li>
+            <strong>27 Nov 2023:</strong>
+            <br/>Our review paper "Social Interaction-Aware Dynamical Models and Decision-Making for Autonomous Vehicles" is published in Advanced Intelligent Systems.
+        </li>
+        <li>
+            <strong>5 Jul 2023:</strong>
+            <br/>Dr. Wei visited Shanghai Jiao Tong University and Tongji University, and gave a presentation on Autonomous Vehicle Decision-making and Control.
+        </li>
+        <li>
+            <strong>21 Apr 2023:</strong>
+            <br/>Dr. Wei visited Chongqing University and gave a presentation on Human-inspired Autonomous Driving.
+        </li>
+        <li>
+            <strong>3 Dec 2022:</strong>
+            <br/>Dr. Chongfeng Wei attended the North-South Multi-disciplinary Researcher Workshop and gave a presentation on Human-centric Autonomous Driving.
+        </li>
+        <li>
+            <strong>29 Nov 2022:</strong>
+            <br/>Invited by Tongji University, Dr. Chongfeng Wei attended a seminar at the 2022 International Conference on the Cooperation and Integration of Industrial Education, Research and Application.
+        </li>
+        <li>
+            <strong>3 Oct 2022:</strong>
+            <br/>Mr. Jing Wang and Mr. Hady Farrag joined the group as PhD students, welcome!
+        </li>
+        <li>
+            <strong>19 Sept 2022:</strong>
+            <br/>Dr. Chongfeng Wei has been nominated as an Associate Editor of IEEE Transactions on Intelligent Transportation Systems.
+        </li>
+        <li>
+            <strong>6 Jul 2022:</strong>
+            <br/>Dr. Chongfeng Wei attended the 11th IFAC Symposium on Intelligent Autonomous Vehicles held in Prague, Czech Republic.
+        </li>
+        <li>
+            <strong>2 Jul 2022:</strong>
+            <br/>Our paper "Interaction-aware Decision-making for Automated Vehicles using Social Value Orientation" has been accepted by IEEE Transactions on Intelligent Vehicles.
+        </li>
+        <li>
+            <strong>20 Jun 2022:</strong>
+            <br/>Our paper "Drivers' Evaluation of Different Automated Driving Styles: Is It both Comfortable and Natural?" has been accepted by the journal Human Factors (a top journal in the human factors research area).
+        </li>
+        <li>
+            <strong>28 May 2022:</strong>
+            <br/>Our paper "Explaining Unsafe Pedestrian Road Crossing Behaviours Using a Psychophysics-based Gap Acceptance Model" has been accepted by Safety Science.
+        </li>
+        <li>
+            <strong>7 Mar 2022:</strong>
+            <br/>I have been appointed as the Associate Editor of The 25th IEEE International Conference on Intelligent Transportation Systems (IEEE ITSC 2022).
+        </li>
+        <li>
+            <strong>12 Feb 2022:</strong>
+            <br/>Dr. Chongfeng Wei has been awarded the Fellowship of Higher Education Academy.
+        </li>
+        <li>
+            <strong>10 Jan 2022:</strong>
+            <br/>Our paper "Human-centred Risk-potential-based Trajectory Planning of Autonomous Vehicles" has been accepted by IMechE Part D: Journal of Automobile Engineering.
+        </li>
+        <li>
+            <strong>22 Nov 2021:</strong>
+            <br/>I have been appointed as the Associate Editor of the IEEE Transactions on Intelligent Vehicles.
+        </li>
+        <li>
+            <strong>1 Sept 2021:</strong>
+            <br/>Our paper "Human-centric Autonomous Driving in an AV-Pedestrian Interactive Environment Using SVO" received the Best Paper Award at IEEE ICHMS 2021!
+        </li>
+    </ul>
+
+    <!-- 分页按钮 -->
+    <div id="pagination">
+        <button id="prev" onclick="changePage(-1)" disabled>Previous</button>
+        <span id="page-info"></span>
+        <button id="next" onclick="changePage(1)">Next</button>
+    </div>
+</section>
+
+
+            
+<section id="publications">
+<h1>Publications by year</h1>
+ <h2 onclick="toggleVisibility('pub2023')" style="color: gray;">
+       <span class="arrow">➤</span> 2023
+    </h2>
+    <ul id="pub2023">
+    <li>
+        <strong style="color: #52adc8;">Cooperative Driving of Connected Autonomous Vehicles in Heterogeneous Mixed Traffic: A Game Theoretic Approach</strong>
+        <br/> S Fang, P Hang, C Wei, Y Xing, J Sun
+        <br/><em>arXiv</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Deceleration parameters as implicit communication signals for pedestrians’ crossing decisions and estimations of automated vehicle behaviour</strong>
+        <br/> K Tian, A Tzigieras, C Wei, YM Lee, C Holmes, M Leonetti, N Merat, R Romano, G Markkula
+        <br/><em>Accident Analysis & Prevention</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Combined Estimation of Vehicle Dynamic State and Inertial Parameter for Electric Vehicles Based on Dual Central Difference Kalman Filter Method</strong>
+        <br/> X Jin, J Yang, L Xu, C Wei, Z Wang, G Yin
+        <br/><em>Chinese Journal of Mechanical Engineering</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Advanced Modeling, Analysis and Control for Electrified Vehicles</strong>
+        <br/> X Jin, C Wei, C Huang, C Hu, G Yin, M Chadli
+        <br/><em>Machines</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">User comfort and naturalness of automated driving: The effect of vehicle kinematics and proxemics on subjective response</strong>
+        <br/> C Peng, C Wei, A Solernou, M Hagenzieker, N Merat
+        <br/><em>OSF Preprints</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Human–Machine Redundant Braking System for Aftermarket Low-Speed Electric Vehicle: Design and Validation</strong>
+        <br/> S Sun, W Qu, X Huang, G Tian, P Deng, K Liu, Y Tang, L Chen, C Wei
+        <br/><em>Processes</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Computational imaging and occluded objects perception method based on polarization camera array</strong>
+        <br/> X Pu, X Wang, L Shi, Y Ma, C Wei, X Gao, J Gao
+        <br/><em>Optics Express</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Deep Reinforcement Learning-based Integrated Control of Hybrid Electric Vehicles Driven by Lane-Level High Definition Map</strong>
+        <br/> J Chen, S Li, K Yang, C Wei, X Tang
+        <br/><em>IEEE Transactions on Transportation Electrification</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Intelligent Learning Algorithm and Intelligent Transportation-Based Energy Management Strategies for Hybrid Electric Vehicles: A Review</strong>
+        <br/> J Gan, S Li, C Wei, L Deng, X Tang
+        <br/><em>IEEE Transactions on Intelligent Transportation Systems</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Conceptualising user comfort in automated driving: Findings from an expert group workshop</strong>
+        <br/> C Peng, S Horn, R Madigan, C Marberger, JD Lee, J Krems, M Beggiato, R Romano, C Wei, E Wooldridge, R Happee, M Hagenzieker, N Merat
+        <br/><em>PsyArXiv</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Human-centred risk-potential-based trajectory planning of autonomous vehicles</strong>
+        <br/> Z Wang, C Wei
+        <br/><em>Proceedings of the Institution of Mechanical Engineers</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Deconstructing Pedestrian Crossing Decision-making in Interactions with Continuous Traffic: an Anthropomorphic Model</strong>
+        <br/> K Tian, G Markkula, C Wei, YM Lee, R Madigan, T Hirose, N Merat, R Romano
+        <br/><em>arXiv</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Optimal reinforcement learning and probabilistic-risk-based path planning and following of autonomous vehicles with obstacle avoidance</strong>
+        <br/> H Taghavifar, L Taghavifar, C Hu, C Wei, Y Qin
+        <br/><em>Proceedings of the Institution of Mechanical Engineers</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Improving vibration performance of electric vehicles based on in-wheel motor-active suspension system via robust finite frequency control</strong>
+        <br/> X Jin, J Wang, X He, Z Yan, L Xu, C Wei, G Yin
+        <br/><em>IEEE Transactions on Intelligent Transportation Systems</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Human–Machine Redundant Braking System for Aftermarket Low-Speed Electric Vehicle: Design and Validation.</strong>
+        <br/> S Sun, W Qu, X Huang, G Tian, P Deng, K Liu, Y Tang, L Chen, C Wei
+        <br/><em>Processes</em>
+    </li>
+    </ul>
+
+ <h2 onclick="toggleVisibility('pub2022')" style="color: gray;">
+       <span class="arrow">➤</span> 2022
+    </h2>
+    <ul id="pub2022">
+    <li>
+        <strong style="color: #52adc8;">Interaction-aware Decision-making for Automated Vehicles using Social Value Orientation</strong>
+        <br/> L. Crosato, H. Shum, H. Edmond, C. Wei
+        <br/><em>IEEE Transactions on Intelligent Vehicles</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Impact of Visual and Cognitive Distractions and Time Pressure on Pedestrian Crossing Behaviour: A Simulator Study</strong>
+        <br/> K Tian, G Markkula, C Wei, E Sadraei, T Hirose, N Merat, R Romano
+        <br/><em>PsyArXiv</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Explaining Unsafe Pedestrian Road Crossing Behaviours Using a Psychophysics-based Gap Acceptance Model</strong>
+        <br/> K Tian, G Markkula, C Wei, YM Lee, R Madigan, N Merat, R Romano
+        <br/><em>Safety Science</em>
+    </li>
+    <li>
+        <strong style="color:#52adc8;">Human-centred risk-potential-based trajectory planning of autonomous vehicles</strong>
+        <br/> Z Wang, C Wei
+        <br/><em>Proceedings of the Institution of Mechanical Engineers, Part D: Journal of Automobile Engineering</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Deep Reinforcement Learning-based Integrated Control of Hybrid Electric Vehicles Driven by Lane-Level High Definition Map</strong>
+        <br/> X Tang, J Chen, K Yang, C Wei, L Grzesiak, X Hu
+        <br/><em>IEEE Transactions on Transportation Electrification</em>
+    </li>
+
+</ul>
+
+
+
+ <h2 onclick="toggleVisibility('pub2021')" style="color: gray;">
+       <span class="arrow">➤</span> 2021
+    </h2>
+    <ul id="pub2021">
+    <li>
+        <strong style="color: #52adc8;">A hierarchical framework of emergency collision avoidance amid surrounding vehicles in highway driving</strong>
+        <br/> Q Cui, R Ding, C Wei, B Zhou
+        <br/><em>Control Engineering Practice</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">A novel optimal power management strategy for plug-in hybrid electric vehicle with improved adaptability to traffic conditions</strong>
+        <br/> Y Zhang, C Wei, Y Liu, Z Chen, Z Hou, N Xu
+        <br/><em>Journal of Power Sources</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Human-centric Autonomous Driving in an AV-Pedestrian Interactive Environment Using SVO</strong>
+        <br/> Luca Crosato, C Wei, E Ho, H Shum
+        <br/><em>IEEE International Conference on Human-Machine Systems: Proceedings</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Human-like Decision Making and Motion Control for Smooth and Natural Car Following</strong>
+        <br/> C Wei, E Paschalidis, N Merat, A Solernou, F Hajiseyedjavadi, R Romano
+        <br/><em>IEEE Transactions on Intelligent Vehicles</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Short-Term Lateral Behavior Reasoning for Target Vehicles Considering Driver Preview Characteristic</strong>
+        <br/> Z Zhou, Y Wang, R Liu, C Wei, H Du, C Yin
+        <br/><em>IEEE Transactions on Intelligent Transportation Systems</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Trajectory Prediction of Preceding Target Vehicles Based on Lane Crossing and Final Points Generation Model Considering Driving Styles</strong>
+        <br/> X Liu, Y Wang, Z Zhou, K Nam, C Wei, C Yin
+        <br/><em>IEEE Transactions on Vehicular Technology</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Distributed model predictive control strategy for constrained high-speed virtually coupled train set</strong>
+        <br/> Y Liu, R Liu, C Wei, J Xun, T Tang
+        <br/><em>IEEE Transactions on Vehicular Technology</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Path-tracking and lateral stabilisation for autonomous vehicles by using the steering angle envelope</strong>
+        <br/> Q Cui, R Ding, C Wei, B Zhou
+        <br/><em>Vehicle System Dynamics</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Drivers’ Evaluation of Different Automated Driving Styles: Is It Both Comfortable and Natural?</strong>
+        <br/> C Peng, N Merat, R Romano, F Hajiseyedjavadi, E Paschalidis, C Wei, ...
+        <br/><em>PsyArXiv</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Effect of Environmental Factors and Individual Differences on Subjective Evaluation of Human-like and Conventional Automated Vehicle Controllers</strong>
+        <br/> F Hajiseyedjavadi, E Boer, R Romano, E Paschalidis, C Wei, A Solernou, ...
+        <br/><em>PsyArXiv</em>
+    </li>
+</ul>
+
+
+
+ <h2 onclick="toggleVisibility('pub2020')" style="color: gray;">
+       <span class="arrow">➤</span> 2020
+    </h2>
+    <ul id="pub2020">
+    <li>
+        <strong style="color: #52adc8;">An adaptive motion planning technique for on-road autonomous driving</strong>
+        <br/> X Jin, Z Yan, G Yin, S Li, C Wei
+        <br/><em>IEEE Access</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Deriving metrics of driving comfort for autonomous vehicles: A dynamic latent variable model of speed choice</strong>
+        <br/> E Paschalidis, F Hajiseyedjavadi, C Wei, A Solernou, AH Jamson, ...
+        <br/><em>Analytic Methods in Accident Research</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Creating Kinematics-dependent Pedestrian Crossing Willingness Model When Interacting with Approaching Vehicle</strong>
+        <br/> K Tian, G Markkula, C Wei, R Romano
+        <br/><em>IEEE 23rd International Conference on Intelligent Transportation …</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Traffic Status Prediction of Arterial Roads Based on the Deep Recurrent Q-Learning</strong>
+        <br/> W Hao, D Rong, K Yi, Q Zeng, Z Gao, W Wu, C Wei, B Scepanovic
+        <br/><em>Journal of Advanced Transportation</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Measuring drivers’ physiological response to different vehicle controllers in highly automated driving (HAD): Opportunities for establishing real-time values of driver discomfort</strong>
+        <br/> V Radhakrishnan, N Merat, T Louw, MG Lenné, R Romano, E Paschalidis, ...
+        <br/><em>Information</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Commercial vehicle-based robust control of seated whole-body vibration using adaptive indirect type-2 fuzzy neural network</strong>
+        <br/> H Taghavifar, B Xu, C Hu, Y Qin, C Wei
+        <br/><em>IEEE Access</em>
+    </li>
+    <li>
+        <strong style="color:#52adc8;">EKF-neural network observer based type-2 fuzzy control of autonomous vehicles</strong>
+        <br/> H Taghavifar, C Hu, Y Qin, C Wei
+        <br/><em>IEEE Transactions on Intelligent Transportation Systems</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Optimal robust control of vehicle lateral stability using damped least-square backpropagation training of neural networks</strong>
+        <br/> H Taghavifar, C Hu, L Taghavifar, Y Qin, J Na, C Wei
+        <br/><em>Neurocomputing</em>
+    </li>
+</ul>
+
+ <h2 onclick="toggleVisibility('pub2019')" style="color: gray;">
+       <span class="arrow">➤</span> 2019
+    </h2>
+    <ul id="pub2019">
+    <li>
+        <strong style="color: #52adc8;">RISE-based integrated motion control of autonomous ground vehicles with asymptotic prescribed performance</strong>
+        <br/> C Hu, H Gao, J Guo, H Taghavifar, Y Qin, J Na, C Wei
+        <br/><em>IEEE Transactions on Systems, Man, and Cybernetics: Systems</em>
+    </li>
+    <li>
+        <strong style="color:#52adc8;">Risk-based autonomous vehicle motion control with considering human driver’s behaviour</strong>
+        <br/> C Wei, R Romano, N Merat, Y Wang, C Hu, H Taghavifar, ...
+        <br/><em>Transportation Research Part C: Emerging Technologies</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Achieving driving comfort of AVs by combined longitudinal and lateral motion control</strong>
+        <br/> C Wei, R Romano, N Merat, F Hajiseyedjavadi, A Solernou, E Paschalidis, ...
+        <br/><em>The IAVSD International Symposium on Dynamics of Vehicles on Roads and …</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Deriving metrics of driving comfort for autonomous vehicles: A time-series latent variable approach of speed choice</strong>
+        <br/> E Paschalidis, F Hajiseyedjavadi, C Wei, AS Crusat, N Merat, R Romano, ...
+        <br/><em>International Choice Modelling Conference</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Lane keeping of autonomous vehicles based on differential steering with adaptive multivariable super-twisting control</strong>
+        <br/> C Hu, Y Qin, H Cao, X Song, K Jiang, JJ Rath, C Wei
+        <br/><em>Mechanical Systems and Signal Processing</em>
+    </li>
+    <li>
+        <strong style="color:#52adc8;">A novel nonlinear road profile classification approach for controllable suspension system: Simulation and experimental validation</strong>
+        <br/> Y Qin, C Wei, X Tang, N Zhang, M Dong, C Hu
+        <br/><em>Mechanical Systems and Signal Processing</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">A tunable nonlinear vibrational energy harvesting system with scissor-like structure</strong>
+        <br/> C Wei, K Zhang, C Hu, Y Wang, H Taghavifar, X Jing
+        <br/><em>Mechanical Systems and Signal Processing</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">MME-EKF-based path-tracking control of autonomous vehicles considering input saturation</strong>
+        <br/> C Hu, Z Wang, H Taghavifar, J Na, Y Qin, J Guo, C Wei
+        <br/><em>IEEE Transactions on Vehicular Technology</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Appraisal of numerical based finite element method to synthesise the wheel-obstacle collision dynamics using a single-wheel tester</strong>
+        <br/> C Wei, H Taghavifar, A Mardani
+        <br/><em>International Journal of Heavy Vehicle Systems</em>
+    </li>
+    <li>
+        <strong style="color: #52adc8;">Driver-centred autonomous vehicle motion control within a blended corridor</strong>
+        <br/> C Wei, R Romano, F Hajiseyedjavadi, N Merat, E Boer
+        <br/><em>IFAC-PapersOnLine</em>
+    </li>
+</ul>
+
+  <h2 onclick="toggleVisibility('pub2018')" style="color: gray;">
+       <span class="arrow">➤</span> 2018
+    </h2>
+    <ul id="pub2018">
+    <li>
+        <strong style="color: #52adc8;">Host–target vehicle model-based lateral state estimation for preceding target vehicles considering measurement delay</strong>
+        <br/> Y Wang, Z Zhou, C Wei, Y Liu, C Yin
+        <br/><em>IEEE Transactions on Industrial Informatics</em>
+    </li>
+</ul>
+
+ <h2 onclick="toggleVisibility('pub2017')" style="color: gray;">
+       <span class="arrow">➤</span> 2017
+    </h2>
+    <ul id="pub2017">
+    <li>
+        <strong style="color:#52adc8;">A volumetric-based tire model for both longitudinal and lateral maneuvers</strong>
+        <br/> C Wei, J Banerjee, J McPhee
+        <br/><em>The Dynamics of Vehicles on Roads and Tracks</em>
+    </li>
+    <li>
+        <strong style="color:#52adc8;">Differential steering based yaw stabilization using ISMC for independently actuated electric vehicles</strong>
+        <br/> C Hu, R Wang, F Yan, Y Huang, H Wang, C Wei
+        <br/><em>IEEE Transactions on Intelligent Transportation Systems</em>
+    </li>
+    <li>
+        <strong style="color:#52adc8;">Railway air brake model and parallel computing scheme</strong>
+        <br/> Q Wu, C Cole, M Spiryagin, Y Wang, W Ma, C Wei
+        <br/><em>Journal of Computational and Nonlinear Dynamics</em>
+    </li>
+    <li>
+        <strong style="color:#52adc8;">A novel approach to energy harvesting from vehicle suspension system: Half-vehicle model</strong>
+        <br/> C Wei, H Taghavifar
+        <br/><em>Energy</em>
+    </li>
+    <li>
+        <strong style="color:#52adc8;">A comprehensive review on vibration energy harvesting: Modelling and realization</strong>
+        <br/> C Wei, X Jing
+        <br/><em>Renewable and Sustainable Energy Reviews</em>
+    </li>
+    <li>
+        <strong style="color:#52adc8;">A finite-element-based approach to characterising FTire model for extended range of operation conditions</strong>
+        <br/> C Wei, OA Olatunbosun, X Yang
+        <br/><em>Vehicle System Dynamics</em>
+    </li>
+    <li>
+        <strong style="color:#52adc8;">Prediction of influence of operating conditions and tyre design parameters on tyre cornering characteristics</strong>
+        <br/> C Wei, OA Olatunbosun
+        <br/><em>International Journal of Vehicle Performance</em>
+    </li>
+</ul>
+
+</section>
+
+<section id="openings">
+                <h2>Openings</h2>
+                <p>list</p>
+            </section>
+        </div>
+    </div>
+</section>
+<script>
+function toggleVisibility(yearId) {
+    const list = document.getElementById(yearId);
+    const symbol = list.previousElementSibling.querySelector('span');
+
+    if (list.style.display === 'none') {
+        list.style.display = 'block';
+        symbol.textContent = '▼'; // 展开时显示下肩头符号
+    } else {
+        list.style.display = 'none';
+        symbol.textContent = '➤'; // 收起时显示右肩头符号
+    }
+}
+
+
+ function showSection(sectionId) {
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => section.classList.remove('active'));
+        document.getElementById(sectionId).classList.add('active');
+    }
+
+    window.onload = function() {
+        showSection('home'); // 确保默认显示 'home' 部分
+    };
+let currentPage = 0; // 当前页码
+    const itemsPerPage = 5; // 每页显示的条目数量
+    const newsItems = document.querySelectorAll('#news-list li'); // 获取所有新闻项
+    const totalPages = Math.ceil(newsItems.length / itemsPerPage); // 计算总页数
+
+    function displayPage(page) {
+        // 隐藏所有新闻项
+        newsItems.forEach((item, index) => {
+            item.style.display = (index >= page * itemsPerPage && index < (page + 1) * itemsPerPage) ? 'list-item' : 'none';
+        });
+
+        // 更新页面信息
+        document.getElementById('page-info').innerText = `Page ${page + 1} of ${totalPages}`;
+
+        // 更新按钮状态
+        document.getElementById('prev').disabled = (page === 0);
+        document.getElementById('next').disabled = (page === totalPages - 1);
+    }
+
+    function changePage(direction) {
+        currentPage += direction; // 更新当前页码
+        displayPage(currentPage); // 显示当前页
+    }
+
+    // 初始加载显示第一页
+    window.onload = function() {
+        displayPage(currentPage);
+    };
+</script>
+<footer>
+        <p>© 2024 Chongfeng Wei. All rights reserved.</p>
+ </footer>
 
 </body>
 </html>
